@@ -26,3 +26,13 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('product', App\Http\Controllers\ProductController::class);
+
+Route::resource('sale', App\Http\Controllers\SaleController::class);
+
+Route::resource('order', App\Http\Controllers\OrderController::class);
+
+Route::resource('sale_detail', App\Http\Controllers\Sale_detailController::class);
+
+Route::resource('debt', App\Http\Controllers\DebtController::class);
