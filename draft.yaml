@@ -1,5 +1,6 @@
 models:
     Product:
+        code: string:50
         name: string:50 
         description: string:100 
         price: double 
@@ -26,7 +27,6 @@ models:
         leave: float 
         subtract: float 
         total: double 
-
 relationships:
     Product:
         Sale:

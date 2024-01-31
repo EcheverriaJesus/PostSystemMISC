@@ -52,12 +52,14 @@ final class ProductControllerTest extends TestCase
     #[Test]
     public function store_saves_and_redirects(): void
     {
+        $code = $this->faker->word();
         $name = $this->faker->name();
         $description = $this->faker->text();
         $price = $this->faker->randomFloat(/** double_attributes **/);
         $stock = $this->faker->numberBetween(-10000, 10000);
 
         $response = $this->post(route('product.store'), [
+            'code' => $code,
             'name' => $name,
             'description' => $description,
             'price' => $price,
@@ -65,6 +67,7 @@ final class ProductControllerTest extends TestCase
         ]);
 
         $products = Product::query()
+            ->where('code', $code)
             ->where('name', $name)
             ->where('description', $description)
             ->where('price', $price)
@@ -118,12 +121,14 @@ final class ProductControllerTest extends TestCase
     public function update_redirects(): void
     {
         $product = Product::factory()->create();
+        $code = $this->faker->word();
         $name = $this->faker->name();
         $description = $this->faker->text();
         $price = $this->faker->randomFloat(/** double_attributes **/);
         $stock = $this->faker->numberBetween(-10000, 10000);
 
         $response = $this->put(route('product.update', $product), [
+            'code' => $code,
             'name' => $name,
             'description' => $description,
             'price' => $price,
@@ -135,6 +140,7 @@ final class ProductControllerTest extends TestCase
         $response->assertRedirect(route('product.index'));
         $response->assertSessionHas('product.id', $product->id);
 
+        $this->assertEquals($code, $product->code);
         $this->assertEquals($name, $product->name);
         $this->assertEquals($description, $product->description);
         $this->assertEquals($price, $product->price);

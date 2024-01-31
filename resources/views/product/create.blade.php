@@ -8,13 +8,12 @@
     <section class="bg-white lg:mx-56 lg:mt-10">
         <div class="flex min-h-full flex-col justify-center py-12">
             <div class="flex flex-col sm:mx-auto sm:w-full sm:max-w-sm items-center">
-               {{--  <img src="{{ asset('logos') . '/logo_nombre_negro.png' }}" alt="Imagen Logo" class="w-40"> --}}
                 <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Crear Producto</h2>
             </div>
                   
             <div class="px-6 lg:px-0 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form class="space-y-4" action="{{ route('register') }}" method="POST">
-
+                <form class="space-y-4" action="{{ route('product.store') }}" method="POST">
+                    @csrf
                     <div>
                         <label for="ecode" class="block text-sm font-medium leading-6 text-gray-900">Código</label>
                         <div class="mt-2">

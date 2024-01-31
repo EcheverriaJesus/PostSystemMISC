@@ -13,7 +13,8 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
-        $products = Product::all();
+        //$products = Product::all();
+        $products = Product::paginate(5);
 
         return view('product.index', compact('products'));
     }
@@ -23,7 +24,7 @@ class ProductController extends Controller
         return view('product.create');
     }
 
-    public function store(ProductStoreRequest $request): Response
+    public function store(ProductStoreRequest $request): RedirectResponse
     {
         $product = Product::create($request->validated());
 

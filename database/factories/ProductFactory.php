@@ -21,6 +21,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
+            'code' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
             'price' => $this->faker->randomFloat(0, 0, 9999999999.),

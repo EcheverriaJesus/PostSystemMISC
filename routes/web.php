@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DebtController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::resource('order', App\Http\Controllers\OrderController::class);
 Route::resource('sale_detail', App\Http\Controllers\Sale_detailController::class);
 
 Route::resource('debt', App\Http\Controllers\DebtController::class);
+
+Route::any('debt',[DebtController::class, 'search'])->name('debt.search');

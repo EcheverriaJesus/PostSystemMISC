@@ -5,20 +5,20 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-7">
         <div class="max-w-11xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg pt-4">
                 <section class="container px-4 mx-auto">
-                    <div class="sm:flex sm:items-center sm:justify-between pt-3">
+                    <div class="flex flex-col lg:flex-row sm:justify-between pt-3">
                         <div>
                             <div class="flex items-center gap-x-3">
                                 <h2 class="text-lg font-medium text-gray-800">Lista de Productos</h2>
                                 <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">240 Productos</span>
                             </div>
-                            <p class="mt-1 text-sm text-gray-500">These companies have purchased in the last 12 months.</p>
+                            <p class="mt-1 text-sm text-gray-500">Productos registrados con y sin código de barras.</p>
                         </div>
-                        <div class="flex items-center mt-4 gap-x-3">
-                            <div class="relative flex items-center mt-4 md:mt-0">
+                        <div class="flex mt-4 gap-x-3 justify-between">
+                            <div class="hidden lg:flex relative items-center mt-4 md:mt-0">
                                 <span class="absolute">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -49,6 +49,15 @@
                                 <span>Nuevo</span>
                             </a>
                         </div>
+                        <div class="flex relative items-center mt-4 md:mt-0 lg:hidden">
+                            <span class="absolute">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </span>
+                
+                            <input type="text" value="" placeholder="Search" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5">
+                        </div>
                     </div>
                 
                     <div class="flex flex-col mt-6">
@@ -60,7 +69,7 @@
                                             <tr>
                                                 <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-100">
                                                     <div class="flex items-center gap-x-3">
-                                                        <span>Nombre</span>
+                                                        Nombre
                                                     </div>
                                                 </th>
                 
@@ -85,122 +94,53 @@
                                                 </th>
                                             </tr>
                                         </thead>
+
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            <tr>
-                                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                                    <div class="inline-flex items-center gap-x-3">
-                                                        <div class="flex items-center gap-x-2">
-                                                            <div class="flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-full">
+                                            @foreach ($products as $product)
+                                                <tr>
+                                                    <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                                        <h2 class="font-normal text-gray-800">{{ $product->name }}</h2>
+                                                        <p class="text-xs font-normal text-gray-500">{{ $product->description }}</p>
+                                                    </td>
+                                                    <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
+                                                        $ {{ $product->price }}
+                                                    </td>
+                                                    <td class="px-4 py-4 text-sm text-gray-500">
+                                                        {{ $product->stock }}
+                                                    </td>
+                                                    <td class="px-4 py-4 text-sm text-gray-500">
+                                                        {{ $product->created_at }}
+                                                    </td>
+                                                    <td class="px-4 py-4 text-sm text-gray-500">
+                                                        {{ $product->updated_at }}
+                                                    </td>
+                                                    <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                                        <div class="flex items-center gap-x-6">
+                                                            <button class="text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                                 </svg>
-                                                            </div>
-                                                            
-                                                            <div>
-                                                                <h2 class="font-normal text-gray-800">Electrolic</h2>
-                                                                <p class="text-xs font-normal text-gray-500">Electrolic</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-                                                    $ 24.00
-                                                </td>
-                                                <td class="px-4 py-4 text-sm text-gray-500">600 g</td>
-                                                <td class="px-4 py-4 text-sm text-gray-500">Jan 4, 2022</td>
-                                                <td class="px-4 py-4 text-sm text-gray-500">02/01/2024</td>
-                                                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                    <div class="flex items-center gap-x-6">
-                                                        <button class="text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                            </svg>
-                                                        </button>
-                
-                                                        <button class="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                                    <div class="inline-flex items-center gap-x-3">
-                                                        <div class="flex items-center gap-x-2">
-                                                            <div class="flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-full">
+                                                            </button>
+                    
+                                                            <button class="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                                                 </svg>
-                                                            </div>
-                                                            
-                                                            <div>
-                                                                <h2 class="font-normal text-gray-800">Electrolic</h2>
-                                                                <p class="text-xs font-normal text-gray-500">Electrolic</p>
-                                                            </div>
+                                                            </button>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-                                                    $ 24.00
-                                                </td>
-                                                <td class="px-4 py-4 text-sm text-gray-500">600 g</td>
-                                                <td class="px-4 py-4 text-sm text-gray-500">Jan 4, 2022</td>
-                                                <td class="px-4 py-4 text-sm text-gray-500">02/01/2024</td>
-                                                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                    <div class="flex items-center gap-x-6">
-                                                        <button class="text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                            </svg>
-                                                        </button>
-                
-                                                        <button class="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
+                                        
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 
-                    <div class="flex items-center justify-between my-6">
-                        <a href="#" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                            </svg>
-                
-                            <span>
-                                Anterior
-                            </span>
-                        </a>
-                
-                        <div class="items-center hidden md:flex gap-x-3">
-                            <a href="#" class="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
-                            <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">2</a>
-                            <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">3</a>
-                            <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
-                            <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">12</a>
-                            <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">13</a>
-                            <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">14</a>
-                        </div>
-                
-                        <a href="#" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100">
-                            <span>
-                                Siguiente
-                            </span>
-                
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                            </svg>
-                        </a>
+                    <div class="my-6">
+                        {{ $products->links('vendor.pagination.tailwind') }} <!-- Cambia 'tailwind' al estilo de paginación que prefieras -->  
                     </div>
                 </section>
                    

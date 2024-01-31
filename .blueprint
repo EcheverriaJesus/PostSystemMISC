@@ -9,11 +9,11 @@ created:
     - database/factories/OrderFactory.php
     - database/factories/SaleDetailFactory.php
     - database/factories/DebtFactory.php
-    - database/migrations/2024_01_28_030238_create_products_table.php
-    - database/migrations/2024_01_28_030239_create_sales_table.php
-    - database/migrations/2024_01_28_030240_create_orders_table.php
-    - database/migrations/2024_01_28_030241_create_sale_details_table.php
-    - database/migrations/2024_01_28_030242_create_debts_table.php
+    - database/migrations/2024_01_30_171501_create_products_table.php
+    - database/migrations/2024_01_30_171502_create_sales_table.php
+    - database/migrations/2024_01_30_171503_create_orders_table.php
+    - database/migrations/2024_01_30_171504_create_sale_details_table.php
+    - database/migrations/2024_01_30_171505_create_debts_table.php
     - app/Models/Product.php
     - app/Models/Sale.php
     - app/Models/Order.php
@@ -29,16 +29,9 @@ created:
     - tests/Feature/Http/Controllers/OrderControllerTest.php
     - tests/Feature/Http/Controllers/Sale_detailControllerTest.php
     - tests/Feature/Http/Controllers/DebtControllerTest.php
-    - app/Http/Requests/ProductStoreRequest.php
-    - app/Http/Requests/ProductUpdateRequest.php
-    - app/Http/Requests/SaleStoreRequest.php
-    - app/Http/Requests/SaleUpdateRequest.php
-    - app/Http/Requests/OrderStoreRequest.php
-    - app/Http/Requests/OrderUpdateRequest.php
-    - app/Http/Requests/Sale_detailStoreRequest.php
-    - app/Http/Requests/Sale_detailUpdateRequest.php
-    - app/Http/Requests/DebtStoreRequest.php
-    - app/Http/Requests/DebtUpdateRequest.php
+updated:
+    - routes/web.php
+skipped:
     - resources/views/product/index.blade.php
     - resources/views/product/create.blade.php
     - resources/views/product/show.blade.php
@@ -59,10 +52,8 @@ created:
     - resources/views/debt/create.blade.php
     - resources/views/debt/show.blade.php
     - resources/views/debt/edit.blade.php
-updated:
-    - routes/web.php
 models:
-    Product: { name: 'string:50', description: 'string:100', price: double, stock: integer }
+    Product: { code: 'string:50', name: 'string:50', description: 'string:100', price: double, stock: integer }
     Sale: { user_name: 'string:50', total: double }
     Order: { customer_name: 'string:50', direction: 'string:100', number_phone: 'string:10', delivery_date: date, leave: float, subtract: float, description: 'string:100', total: double }
     Sale_detail: { amout: integer, subtotal: double, total: double }

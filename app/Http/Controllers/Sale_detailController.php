@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class Sale_detailController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $saleDetails = SaleDetail::all();
 
